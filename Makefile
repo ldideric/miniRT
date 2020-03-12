@@ -6,7 +6,7 @@
 #    By: ldideric <ldideric@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/06 14:04:07 by ldideric       #+#    #+#                 #
-#    Updated: 2020/03/06 12:18:26 by ldideric      ########   odam.nl          #
+#    Updated: 2020/03/10 18:57:52 by ldideric      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ PARS_SRC		=	reader.c \
 					reader_basic.c \
 					read_object.c
 
-RAY_SRC			=	raytracer.c
+RAY_SRC			=	raytracer.c \
+					ndc.c \
+					math1.c
 
 EXTRA_SRC		=	error.c \
 					hooks.c \
@@ -113,7 +115,7 @@ B	= \x1b[38;5;21m
 #purple
 P	= \x1b[38;5;129m
 #light pink
-PL	= \x1b[38;5;219m
+PI	= \x1b[38;5;219m
 #grey
 GR	= \x1b[38;5;244m
 #reset to white

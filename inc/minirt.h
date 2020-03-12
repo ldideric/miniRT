@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/06 12:15:59 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 12:34:35 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+
+//pl  0,0,0            0,1.0,0                                  255,0,255
+//sq  0.0,0.0,20.6     1.0,0.0,0.0      12.6                    255,0,255
+//cy  50.0,0.0,20.6    0,0,1.0          14.2        21.42       10,0,255
+//tr  10,20,10         10,10,20         20,10,10                0,0,255
 
 /*
 ** DEFINES ---------------------------------------------------- |
@@ -38,14 +43,28 @@
 ** ERROR MESSAGES
 */
 
-# define ERR_IN_RT_FILE		10
-# define ERR_MALLOC			11
-# define ERR_02				12
-# define ERR_03				13
+# define ERR_IN_RT_FILE		0
+# define ERR_MALLOC			1
+# define ERR_02				2
+# define ERR_03				3
 
 /*
 ** STRUCTS ---------------------------------------------------- |
 */
+
+typedef struct		s_col
+{
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	a;
+}					t_col;
+
+typedef union		u_rgb
+{
+	unsigned int	color;
+	t_col			packed;
+}					t_rgb;
 
 typedef struct		s_res
 {
@@ -53,18 +72,12 @@ typedef struct		s_res
 	int				y_max;
 }					t_res;
 
-typedef struct		s_rgb
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_rgb;
-
 typedef struct		s_vect
 {
 	double			x;
 	double			y;
 	double			z;
+	int				hit;
 }					t_vect;
 
 typedef struct		s_light
@@ -104,6 +117,7 @@ typedef struct		s_base
 typedef struct		s_objs
 {
 	char			type;
+	t_vect			hit;
 	t_vect			pos1;
 	t_vect			pos2;
 	t_vect			pos3;
@@ -131,29 +145,52 @@ typedef struct		s_data
 	int				bpp;
 	int				len;
 	int				endian;
+	t_base			b;
+	t_objs			*o;
 }					t_data;
 
 /*
 ** | ----------------------------------------------------------------------- |
 */
 
-typedef void		(*t_spec_b)(char *s, t_base *b);
-typedef void		(*t_spec_o)(char *s, t_objs *o);
+typedef void		(*t_read_b)(char *s, t_base *b);
+typedef void		(*t_read_o)(char *s, t_objs *o);
+typedef t_vect		(*t_hit_o)(t_vect rd, t_data *data);
 
 void				printer(t_objs *o);
+void				graphing(t_data *img, int x_max, int y_max);
 
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_vect				ft_normalize(t_vect p);
-void				graphing(t_data *img, int x_max, int y_max);
-void				hooks(t_vars *vars);
-int					obj_cntr(char *s);
-void				*errors(int error);
 
-void				raytracer(t_data *img, t_base b, t_objs *o);
-t_vect				calc_vect(t_vect start, t_vect end);
-t_vect				get_px_pos(t_base *b, int x, int y);
+void				px_loop(t_data *data);
+
+void				*errors(int error);
+void				hooks(t_vars *vars);
+
+/*
+** Math functions
+*/
+
+t_vect				ft_normalize(t_vect p);
+
+double				get_ndcy_pos(t_base *b, int y);
+double				get_ndcx_pos(t_base *b, int x);
+
+t_vect				vect_min(t_vect a, t_vect b);
+t_vect				vect_plus(t_vect a, t_vect b);
+
+double				dot(t_vect v, t_vect u);
+double				length(t_vect v);
+double				length_betw(t_vect a, t_vect b);
+t_vect				vec3(double x, double y, double z);
+
+/*
+** Reader functions
+*/
 
 t_objs				*reader(t_base *t);
+int					obj_cntr(char *s);
+
 char				*rd_vect(char *s, t_vect *vect);
 char				*rd_rgb(char *s, t_rgb *rgb);
 

@@ -6,11 +6,11 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 06:03:54 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/06 12:12:08 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/11 14:43:50 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <extra.h>
 #include <sys/types.h>
 
 static void		*reader_free(void *item0, void *item1)
@@ -23,7 +23,7 @@ static void		*reader_free(void *item0, void *item1)
 
 static void		o_specifier(char *s, t_objs *o)
 {
-	static const t_spec_o spec[128] = {
+	static const t_read_o spec[128] = {
 		['1'] = &rd_sphere,
 		['2'] = &rd_plane,
 		['3'] = &rd_square,
@@ -40,7 +40,7 @@ static void		o_specifier(char *s, t_objs *o)
 
 static void		b_specifier(char *s, t_base *b)
 {
-	static const t_spec_b spec[128] = {
+	static const t_read_b spec[128] = {
 		['R'] = &rd_res,
 		['A'] = &rd_amb,
 		['c'] = &rd_cam,

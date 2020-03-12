@@ -6,11 +6,11 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:21:31 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/06 12:12:08 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/09 15:54:13 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <extra.h>
 
 static int			button_press_hooks(int keycode, t_vars *vars)
 {

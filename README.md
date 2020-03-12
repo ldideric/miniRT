@@ -1,5 +1,16 @@
 # miniRT
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
+
+## To Do list
+- [ ] first and second argument (argc/argv)
+- [ ] only spaces in reader (error when tabs)
+- [ ] raytracer with minus camera
+- [ ]
+
+## Objects
+- [ ] planes
+- [ ] squares
+- [ ] triangles
+- [ ] cyllinder
+
+## Before handing in
+- [ ] removing extra.h file

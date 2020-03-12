@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:23:37 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/10 18:59:56 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 15:33:32 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,34 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void		*reader_free(void *a, void *b, void *c, void *d)
+{
+	free(a);
+	free(b);
+	free(c);
+	free(d);
+	return (errors(ERR_MALLOC));
+}
+
+int			cam_light_cntr(char *s, char c)
+{
+	int count;
+	int i;
+
+	i = 0;
+	count = 0;
+	if (s[i] == c && !ft_isalpha(s[i + 1]))
+		count++;
+	i++;
+	while (s[i] != '\0' && s[i + 1] != '\0')
+	{
+		if (!ft_isalpha(s[i - 1]) && s[i] == c && !ft_isalpha(s[i + 1]))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int			obj_cntr(char *s)
 {
 	int		count;
@@ -27,7 +55,7 @@ int			obj_cntr(char *s)
 
 	i = 0;
 	count = 0;
-	while (s[i])
+	while (s[i] != '\0' && s[i + 1] != '\0')
 	{
 		if (ft_isalpha(s[i]) && ft_isalpha(s[i + 1]))
 			count++;

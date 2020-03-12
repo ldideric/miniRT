@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 12:34:35 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 16:33:34 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@
 ** DEFINES ---------------------------------------------------- |
 */
 
-# ifndef RTFILE
-#  define RTFILE "mini.rt"
-# endif
-
 # define WIN_NAME "bepis is better than pepsi"
 # define TRUE	1
 # define FALSE	0
@@ -45,8 +41,8 @@
 
 # define ERR_IN_RT_FILE		0
 # define ERR_MALLOC			1
-# define ERR_02				2
-# define ERR_03				3
+# define ERR_MLX			2
+# define ERR_NO_RT			3
 
 /*
 ** STRUCTS ---------------------------------------------------- |
@@ -94,6 +90,13 @@ typedef struct		s_cam
 	int				fov;
 }					t_cam;
 
+typedef struct		s_cams
+{
+	t_cam			*c;
+	int				max;
+}					t_cams;
+
+
 typedef struct		s_amb
 {
 	double			amb;
@@ -107,8 +110,11 @@ typedef struct		s_base
 {
 	t_res			res;
 	t_amb			amb;
-	t_cam			cam;
-	t_light			light;
+	t_cams			cam;
+	t_light			*light;
+	char			*file;
+	int				i_c;
+	int				i_l;
 }					t_base;
 
 /*
@@ -132,12 +138,6 @@ typedef struct		s_objs
 ** | ----------------------------------------------------------------------- |
 */
 
-typedef struct		s_vars
-{
-	void			*mlx;
-	void			*win;
-}					t_vars;
-
 typedef struct		s_data
 {
 	void			*img;
@@ -148,6 +148,13 @@ typedef struct		s_data
 	t_base			b;
 	t_objs			*o;
 }					t_data;
+
+typedef struct		s_vars
+{
+	void			*mlx;
+	void			*win;
+	t_data			data;
+}					t_vars;
 
 /*
 ** | ----------------------------------------------------------------------- |
@@ -190,6 +197,8 @@ t_vect				vec3(double x, double y, double z);
 
 t_objs				*reader(t_base *t);
 int					obj_cntr(char *s);
+int					cam_light_cntr(char *s, char c);
+void				*reader_free(void *a, void *b, void *c, void *d);
 
 char				*rd_vect(char *s, t_vect *vect);
 char				*rd_rgb(char *s, t_rgb *rgb);

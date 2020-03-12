@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 12:15:41 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 17:15:32 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_vect			plane(t_vect rd, t_data *data)
 {
-	rd.z = 0;
-	data->b.cam.pos.hit = 9;
+	(void)rd;
+	(void)data;
 	return ((t_vect){0, 0, 0, 0});
 }
 
@@ -26,15 +26,15 @@ t_vect			sphere(t_vect rd, t_data *data)
 	double x;
 	double y;
 
-	t = dot(vect_min(data->o[0].pos1, data->b.cam.pos), rd);
-	p = vect_plus((t_vect){rd.x * t, rd.y * t, rd.z * t, 0}, data->b.cam.pos);
+	t = dot(vect_min(data->o[0].pos1, data->b.cam.c[data->b.i_c].pos), rd);
+	p = vect_plus((t_vect){rd.x * t, rd.y * t, rd.z * t, 0}, data->b.cam.c[data->b.i_c].pos);
 	y = length(vect_min(data->o[0].pos1, p));
 	if (y < data->o[0].dia / 2)
 	{
 		x = sqrt(data->o[0].dia / 2 * data->o[0].dia / 2 - y * y);
 		t = (t - x > t + x) ? t + x : t - x;
 		p = (t_vect){rd.x * t, rd.y * t, rd.z * t, 0};
-		p = vect_plus(p, data->b.cam.pos);
+		p = vect_plus(p, data->b.cam.c[data->b.i_c].pos);
 		p.hit = 1;
 		return (p);
 	}
@@ -72,8 +72,8 @@ unsigned int	first_hit(t_data *data)
 	}
 	while (data->o[i].type)
 	{
-		if (length_betw(hit, data->b.cam.pos) >
-			length_betw(data->o[i].hit, data->b.cam.pos)
+		if (length_betw(hit, data->b.cam.c[data->b.i_c].pos) >
+			length_betw(data->o[i].hit, data->b.cam.c[data->b.i_c].pos)
 			&& data->o[i].hit.hit == 1)
 		{
 			rgb = data->o[i].rgb;
@@ -106,6 +106,8 @@ void			px_loop(t_data *data)
 
 	y = 0;
 	px_pos.z = -1;
+	printf("%d\n", data->b.i_c);
+	printf("%.2f,%.2f,%.2f\n", data->b.cam.c[data->b.i_c].pos.x, data->b.cam.c[data->b.i_c].pos.y, data->b.cam.c[data->b.i_c].pos.z);
 	while (y < data->b.res.y_max)
 	{
 		x = 0;
@@ -113,9 +115,9 @@ void			px_loop(t_data *data)
 		while (x < data->b.res.x_max)
 		{
 			px_pos.x = get_ndcx_pos(&data->b, x);
-			ray = ft_normalize(vect_min(px_pos, data->b.cam.pos));
-			if (x == data->b.res.x_max / 2 && y == data->b.res.y_max / 2)
-				printf("%f,%f,%f\n", ray.x, ray.y, ray.z);
+			ray = ft_normalize(vect_min(px_pos, data->b.cam.c[data->b.i_c].pos));
+			// if (x == data->b.res.x_max / 2 && y == data->b.res.y_max / 2)
+			// 	printf("%f,%f,%f\n", ray.x, ray.y, ray.z);
 			my_mlx_pixel_put(data, x, y, each_px(ray, data));
 			x++;
 		}

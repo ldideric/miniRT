@@ -6,20 +6,12 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 06:03:54 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/11 14:43:50 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 15:53:44 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra.h>
 #include <sys/types.h>
-
-static void		*reader_free(void *item0, void *item1)
-{
-	free(item0);
-	free(item1);
-	errors(ERR_MALLOC);
-	return (NULL);
-}
 
 static void		o_specifier(char *s, t_objs *o)
 {
@@ -47,25 +39,41 @@ static void		b_specifier(char *s, t_base *b)
 		['l'] = &rd_light,
 	};
 
+	if (s[0] == 'c')
+	{
+		b->i_c++;
+		b->cam.max = b->i_c + 1;
+	}
+	if (s[0] == 'l')
+		b->i_l++;
 	spec[(int)s[0]](s, b);
 }
 
-static t_objs	*reader_ext(char **s)
+static t_objs	*reader_ext(char **s, t_base *t)
 {
 	t_objs		*o;
 	int			ret;
 	int			fd;
 
-	*s = malloc(sizeof(char) * 4096);
-	if (*s == NULL)
+	s[0] = malloc(sizeof(char) * (4096 + 1));
+	if (s[0] == NULL)
 		return (errors(ERR_MALLOC));
-	fd = open(RTFILE, O_RDONLY);
-	ret = read(fd, *s, 4096);
+	fd = open(t->file, O_RDONLY);
+	ret = read(fd, s[0], 4096);
 	if (ret < 1)
 		return (errors(ERR_IN_RT_FILE));
-	o = malloc(sizeof(t_objs) * (obj_cntr(*s) + 1));
+	s[0][ret] = '\0';
+	o = malloc(sizeof(t_objs) * (obj_cntr(s[0]) + 1));
 	if (o == NULL)
-		return (reader_free(s, NULL));
+		return (reader_free(s, NULL, NULL, NULL));
+	t->cam.c = malloc(sizeof(t_cam) * (cam_light_cntr(s[0], 'c') + 1));
+	if (t->cam.c == NULL)
+		return (reader_free(s, o, NULL, NULL));
+	t->i_c = -1;
+	t->light = malloc(sizeof(t_light) * (cam_light_cntr(s[0], 'l') + 1));
+	if (t->light == NULL)
+		return (reader_free(s, o, t->cam.c, NULL));
+	t->i_l = -1;
 	return (o);
 }
 
@@ -78,10 +86,10 @@ t_objs			*reader(t_base *t)
 
 	i = 0;
 	c_objs = 0;
-	o = reader_ext(&s);
+	o = reader_ext(&s, t);
 	if (o == NULL)
 		return (NULL);
-	while (s[i])
+	while (s[i] != '\0')
 	{
 		if (ft_isalpha(s[i]) && ft_isalpha(s[i + 1]))
 		{
@@ -94,6 +102,7 @@ t_objs			*reader(t_base *t)
 		i++;
 	}
 	o[c_objs].type = 0;
+	t->i_c = 0;
 	free(s);
 	return (o);
 }

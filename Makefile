@@ -6,7 +6,7 @@
 #    By: ldideric <ldideric@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/06 14:04:07 by ldideric       #+#    #+#                 #
-#    Updated: 2020/03/10 18:57:52 by ldideric      ########   odam.nl          #
+#    Updated: 2020/03/12 14:19:11 by ldideric      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,8 +93,8 @@ CMLX			=	$(NAME) libmlx.dylib
 ifdef DEBUG
 FLAGS	+= -g
 endif
-ifdef RTFILE
-FLAGS	+= -D RTFILE=\"$(RTFILE)\"
+ifdef FSAN
+FLAGS	+= -fsanitize=address
 endif
 ifdef MLX
 MMLX	= @echo "$(PL)Skipping re-compiling the MLX Library.$(RES)"

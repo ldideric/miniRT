@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 07:02:56 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/10 18:56:45 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 15:45:29 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char			*rd_rgb(char *s, t_rgb *rgb)
 	rgb->packed.b = (unsigned char)ft_atoi(s);
 	while (ft_isdigit(*s) || *s == '.')
 		s++;
+	rgb->packed.a = 0;
 	return (s);
 }
 
@@ -44,57 +45,57 @@ char			*rd_vect(char *s, t_vect *vect)
 	return (s);
 }
 
-void			rd_res(char *s, t_base *t)
+void			rd_res(char *s, t_base *b)
 {
 	s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	t->res.x_max = ft_atoi(s);
+	b->res.x_max = ft_atoi(s);
 	while (ft_isdigit(*s))
 		s++;
 	s++;
-	t->res.y_max = ft_atoi(s);
+	b->res.y_max = ft_atoi(s);
 }
 
-void			rd_amb(char *s, t_base *t)
+void			rd_amb(char *s, t_base *b)
 {
 	s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	t->amb.amb = ft_atof(s);
+	b->amb.amb = ft_atof(s);
 	while (ft_isdigit(*s) || *s == '.')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	s = rd_rgb(s, &t->amb.rgb);
+	s = rd_rgb(s, &b->amb.rgb);
 }
 
-void			rd_cam(char *s, t_base *t)
+void			rd_cam(char *s, t_base *b)
 {
 	s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	s = rd_vect(s, &t->cam.pos);
+	s = rd_vect(s, &b->cam.c[b->i_c].pos);
 	while (*s == ' ' || *s == '\t')
 		s++;
-	s = rd_vect(s, &t->cam.vec);
+	s = rd_vect(s, &b->cam.c[b->i_c].vec);
 	while (*s == ' ' || *s == '\t')
 		s++;
-	t->cam.fov = ft_atoi(s);
+	b->cam.c[b->i_c].fov = ft_atoi(s);
 }
 
-void			rd_light(char *s, t_base *t)
+void			rd_light(char *s, t_base *b)
 {
 	s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	s = rd_vect(s, &t->light.pos);
+	s = rd_vect(s, &b->light[b->i_l].pos);
 	while (*s == ' ' || *s == '\t')
 		s++;
-	t->light.bright = ft_atof(s);
+	b->light[b->i_l].bright = ft_atof(s);
 	while (ft_isdigit(*s) || *s == '.')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
-	s = rd_rgb(s, &t->light.rgb);
+	s = rd_rgb(s, &b->light[b->i_l].rgb);
 }

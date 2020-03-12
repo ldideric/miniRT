@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 11:43:32 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/10 15:52:10 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/12 16:34:25 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double		get_ndcx_pos(t_base *b, int x)
 	ratio = b->res.x_max / b->res.y_max;
 	ndc_x = (x + 0.5) / b->res.x_max;
 	ndc_x = 2 * ndc_x - 1;
-	angle = b->cam.fov / 2 * M_PI / 180;
+	angle = b->cam.c[b->i_c].fov / 2 * M_PI / 180;
 	ndc_x *= ratio * tan(angle);
 	return (ndc_x);
 }
@@ -33,7 +33,7 @@ double		get_ndcy_pos(t_base *b, int y)
 
 	ndc_y = (y + 0.5) / b->res.x_max;
 	ndc_y = 1 - 2 * ndc_y;
-	angle = b->cam.fov / 2 * M_PI / 180;
+	angle = b->cam.c[b->i_c].fov / 2 * M_PI / 180;
 	ndc_y *= tan(angle);
 	return (ndc_y);
 }

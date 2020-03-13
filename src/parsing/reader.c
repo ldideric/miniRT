@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 06:03:54 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 15:53:51 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:03:04 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ t_objs			*reader(t_base *b, int i, int c_objs)
 	char		*s;
 
 	o = reader_ext(&s, b);
-	b->i_l = -1;
 	if (o == NULL)
 		return (NULL);
+	b->i_l = -1;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '#')

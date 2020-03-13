@@ -2,8 +2,9 @@
 
 ### To Do list
 - [ ] first and second argument (argc/argv)
-- [ ] only spaces in reader (error when tabs)
-- [ ] raytracer with minus camera
+- [x] only spaces in reader (error when tabs)
+- [ ] fix parsing fully
+- [x] raytracer with minus camera
 - [x] moving camera with hooks
 
 ### Objects

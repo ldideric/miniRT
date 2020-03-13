@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:21:31 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 16:00:40 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:34:26 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,26 @@ static int			cam_change_hooks(int keycode, t_vars *vars)
 
 static int			refresh_hooks(t_vars *vars)
 {
-	free(vars->data.o);
+	// free(vars->data.o);
 	ft_printf("Reading...\n");
-	vars->data.o = reader(&vars->data.b, 0, 0);
-	if (vars->data.o == NULL)
+	// vars->data.o = reader(&vars->data.b, 0, 0);
+	while (vars->data.b.cam.c[0].pos.z <= 5.000)
 	{
-		ft_printf("Can't refresh... check for tabs/other mistakes?\n");
-		return (0);
+		vars->data.b.cam.c[0].pos.z += 0.001;
+	
+	// if (vars->data.o == NULL)
+	// {
+	// 	ft_printf("Can't refresh... check for tabs/other mistakes?\n");
+	// 	return (0);
+	// }
+	// ft_printf("Rendering...\n");
+		px_loop(&vars->data);
+		for(int i = 1; i < 10000; i++)
+		{
+		}
+	// ft_printf("Done!\n");
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	}
-	ft_printf("Rendering...\n");
-	px_loop(&vars->data);
-	ft_printf("Done!\n");
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	return (0);
 }
 

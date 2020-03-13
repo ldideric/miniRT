@@ -6,15 +6,16 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 16:33:34 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 15:46:06 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <libft.h>
 # include <mlx.h>
+# include <libft.h>
+# include <ft_printf.h>
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -96,7 +97,6 @@ typedef struct		s_cams
 	int				max;
 }					t_cams;
 
-
 typedef struct		s_amb
 {
 	double			amb;
@@ -162,17 +162,24 @@ typedef struct		s_vars
 
 typedef void		(*t_read_b)(char *s, t_base *b);
 typedef void		(*t_read_o)(char *s, t_objs *o);
-typedef t_vect		(*t_hit_o)(t_vect rd, t_data *data);
+typedef t_vect		(*t_hit_o)(t_vect rd, t_data *data, t_objs o);
 
 void				printer(t_objs *o);
 void				graphing(t_data *img, int x_max, int y_max);
 
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-void				px_loop(t_data *data);
+void				*px_loop(t_data *data);
 
 void				*errors(int error);
 void				hooks(t_vars *vars);
+
+/*
+** Object functions
+*/
+
+t_vect				sphere(t_vect rd, t_data *data, t_objs o);
+t_vect				plane(t_vect rd, t_data *data, t_objs o);
 
 /*
 ** Math functions
@@ -195,7 +202,7 @@ t_vect				vec3(double x, double y, double z);
 ** Reader functions
 */
 
-t_objs				*reader(t_base *t);
+t_objs				*reader(t_base *t, int i, int c_objs);
 int					obj_cntr(char *s);
 int					cam_light_cntr(char *s, char c);
 void				*reader_free(void *a, void *b, void *c, void *d);

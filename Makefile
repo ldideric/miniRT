@@ -6,7 +6,7 @@
 #    By: ldideric <ldideric@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/06 14:04:07 by ldideric       #+#    #+#                 #
-#    Updated: 2020/03/12 14:19:11 by ldideric      ########   odam.nl          #
+#    Updated: 2020/03/13 10:22:58 by ldideric      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ PARS_PATH		=	./$(SRC_PATH)/parsing/
 RAY_PATH		=	./$(SRC_PATH)/raytracing/
 EXTRA_PATH		=	./$(SRC_PATH)/extras/
 LIBFT_PATH		=	./$(SRC_PATH)/libft/
+PRINTF_PATH		=	./$(SRC_PATH)/printf/
 
 PARS_SRC		=	reader.c \
 					reader_basic.c \
@@ -69,18 +70,33 @@ LIBFT_SRC		=	ft_memset.c \
 					ft_putstr.c \
 					ft_atof.c
 
+PRINTF_SRC	=	ft_printf.c \
+				ft_printf_bonus.c \
+				ft_flags.c \
+				ft_itoa_base.c \
+				ft_ultoa_base.c \
+				printf_c.c \
+				printf_s.c \
+				printf_di.c \
+				printf_p.c \
+				printf_u.c \
+				printf_x.c \
+				printf_per.c
+
 PARS_SRC_DIR	=	$(PARS_SRC:%=$(PARS_PATH)%)
 RAY_SRC_DIR		=	$(RAY_SRC:%=$(RAY_PATH)%)
 EXTRA_SRC_DIR	=	$(EXTRA_SRC:%=$(EXTRA_PATH)%)
 LIBFT_SRC_DIR	=	$(LIBFT_SRC:%=$(LIBFT_PATH)%)
+PRINTF_SRC_DIR	=	$(PRINTF_SRC:%=$(PRINTF_PATH)%)
 
 PARS_OBJ_DIR	=	$(PARS_SRC_DIR:.c=.o)
 RAY_OBJ_DIR		=	$(RAY_SRC_DIR:.c=.o)
 EXTRA_OBJ_DIR	=	$(EXTRA_SRC_DIR:.c=.o)
 LIBFT_OBJ_DIR	=	$(LIBFT_SRC_DIR:.c=.o)
+PRINTF_OBJ_DIR	=	$(PRINTF_SRC_DIR:.c=.o)
 
 C_FILES			=	./$(SRC_PATH)/minirt.c $(PARS_SRC_DIR) $(RAY_SRC_DIR)\
-					$(EXTRA_SRC_DIR) $(LIBFT_SRC_DIR)
+					$(EXTRA_SRC_DIR) $(LIBFT_SRC_DIR) $(PRINTF_SRC_DIR)
 O_FILES			=	$(C_FILES:.c=.o)
 FILES			=	$(O_FILES) mlx/libmlx.dylib
 

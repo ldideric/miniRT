@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 06:26:05 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 14:44:29 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:28:38 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			rd_sphere(char *s, t_objs *o)
 	while (*s == ' ' || *s == '\t')
 		s++;
 	o->dia = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
@@ -60,7 +60,7 @@ void			rd_square(char *s, t_objs *o)
 	while (*s == ' ' || *s == '\t')
 		s++;
 	o->size = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
@@ -81,12 +81,12 @@ void			rd_cylinder(char *s, t_objs *o)
 	while (*s == ' ' || *s == '\t')
 		s++;
 	o->dia = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
 	o->height = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;

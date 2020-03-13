@@ -4,7 +4,7 @@
 - [ ] first and second argument (argc/argv)
 - [ ] only spaces in reader (error when tabs)
 - [ ] raytracer with minus camera
-- [ ] moving camera with hooks
+- [x] moving camera with hooks
 
 ### Objects
 - [ ] planes
@@ -14,3 +14,4 @@
 
 ### Before handing in
 - [ ] removing extra.h file
+- [ ] removing comment skipper

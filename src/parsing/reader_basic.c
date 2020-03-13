@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 07:02:56 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 15:45:29 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:28:32 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char			*rd_rgb(char *s, t_rgb *rgb)
 		s++;
 	s++;
 	rgb->packed.b = (unsigned char)ft_atoi(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	rgb->packed.a = 0;
 	return (s);
@@ -40,7 +40,7 @@ char			*rd_vect(char *s, t_vect *vect)
 		s++;
 	s++;
 	vect->z = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	return (s);
 }
@@ -63,7 +63,7 @@ void			rd_amb(char *s, t_base *b)
 	while (*s == ' ' || *s == '\t')
 		s++;
 	b->amb.amb = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;
@@ -93,7 +93,7 @@ void			rd_light(char *s, t_base *b)
 	while (*s == ' ' || *s == '\t')
 		s++;
 	b->light[b->i_l].bright = ft_atof(s);
-	while (ft_isdigit(*s) || *s == '.')
+	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
 	while (*s == ' ' || *s == '\t')
 		s++;

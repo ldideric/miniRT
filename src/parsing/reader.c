@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 06:03:54 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 15:53:44 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/13 15:53:51 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		b_specifier(char *s, t_base *b)
 	spec[(int)s[0]](s, b);
 }
 
-static t_objs	*reader_ext(char **s, t_base *t)
+static t_objs	*reader_ext(char **s, t_base *b)
 {
 	t_objs		*o;
 	int			ret;
@@ -58,39 +58,40 @@ static t_objs	*reader_ext(char **s, t_base *t)
 	s[0] = malloc(sizeof(char) * (4096 + 1));
 	if (s[0] == NULL)
 		return (errors(ERR_MALLOC));
-	fd = open(t->file, O_RDONLY);
+	fd = open(b->file, O_RDONLY);
 	ret = read(fd, s[0], 4096);
 	if (ret < 1)
 		return (errors(ERR_IN_RT_FILE));
 	s[0][ret] = '\0';
+	if (ft_strchr(*s, '\t') != NULL)
+		return (errors(ERR_IN_RT_FILE));
 	o = malloc(sizeof(t_objs) * (obj_cntr(s[0]) + 1));
 	if (o == NULL)
 		return (reader_free(s, NULL, NULL, NULL));
-	t->cam.c = malloc(sizeof(t_cam) * (cam_light_cntr(s[0], 'c') + 1));
-	if (t->cam.c == NULL)
+	b->cam.c = malloc(sizeof(t_cam) * (cam_light_cntr(s[0], 'c') + 1));
+	if (b->cam.c == NULL)
 		return (reader_free(s, o, NULL, NULL));
-	t->i_c = -1;
-	t->light = malloc(sizeof(t_light) * (cam_light_cntr(s[0], 'l') + 1));
-	if (t->light == NULL)
-		return (reader_free(s, o, t->cam.c, NULL));
-	t->i_l = -1;
+	b->i_c = -1;
+	b->light = malloc(sizeof(t_light) * (cam_light_cntr(s[0], 'l') + 1));
+	if (b->light == NULL)
+		return (reader_free(s, o, b->cam.c, NULL));
 	return (o);
 }
 
-t_objs			*reader(t_base *t)
+t_objs			*reader(t_base *b, int i, int c_objs)
 {
 	t_objs		*o;
 	char		*s;
-	int			i;
-	int			c_objs;
 
-	i = 0;
-	c_objs = 0;
-	o = reader_ext(&s, t);
+	o = reader_ext(&s, b);
+	b->i_l = -1;
 	if (o == NULL)
 		return (NULL);
 	while (s[i] != '\0')
 	{
+		if (s[i] == '#')
+			while (s[i] != '\n')
+				i++;
 		if (ft_isalpha(s[i]) && ft_isalpha(s[i + 1]))
 		{
 			o_specifier(s + i, &o[c_objs]);
@@ -98,11 +99,11 @@ t_objs			*reader(t_base *t)
 			i++;
 		}
 		else if (ft_isalpha(s[i]))
-			b_specifier(s + i, t);
+			b_specifier(s + i, b);
 		i++;
 	}
 	o[c_objs].type = 0;
-	t->i_c = 0;
+	b->i_c = 0;
 	free(s);
 	return (o);
 }

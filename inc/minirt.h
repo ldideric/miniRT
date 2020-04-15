@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 15:46:06 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/25 19:01:55 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void				hooks(t_vars *vars);
 
 t_vect				sphere(t_vect rd, t_data *data, t_objs o);
 t_vect				plane(t_vect rd, t_data *data, t_objs o);
+t_vect				triangle(t_vect rd, t_data *data, t_objs o);
 
 /*
 ** Math functions
@@ -196,6 +197,7 @@ t_vect				vect_plus(t_vect a, t_vect b);
 double				dot(t_vect v, t_vect u);
 double				length(t_vect v);
 double				length_betw(t_vect a, t_vect b);
+t_vect				cross_pr(t_vect a, t_vect b);
 t_vect				vec3(double x, double y, double z);
 
 /*

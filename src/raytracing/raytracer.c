@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 15:41:00 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/25 19:20:16 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,12 @@ t_vect			plane(t_vect rd, t_data *data, t_objs o)
 	return ((t_vect){0, 0, 0, 0});
 }
 
-t_vect			sphere(t_vect rd, t_data *data, t_objs o)
-{
-	t_vect p;
-	double t;
-	double x;
-	double y;
-
-	t = dot(vect_min(o.pos1, data->b.cam.c[data->b.i_c].pos), rd);
-	p = (t_vect){rd.x * t, rd.y * t, rd.z * t, 0};
-	p = vect_plus(data->b.cam.c[data->b.i_c].pos, p);
-	y = length(vect_min(o.pos1, p));
-	if (y < o.dia / 2)
-	{
-		x = sqrt(o.dia / 2 * o.dia / 2 - y * y);
-		t = (t - x > t + x) ? t + x : t - x;
-		p = (t_vect){rd.x * t, rd.y * t, rd.z * t, 0};
-		p = vect_plus(p, data->b.cam.c[data->b.i_c].pos);
-		p.hit = 1;
-		return (p);
-	}
-	return ((t_vect){0, 0, 0, 0});
-}
-
 t_vect			hit_checker(t_vect rd, t_objs o, t_data *data)
 {
 	static const t_hit_o hit_o[128] = {
 		['s'] = &sphere,
 		['p'] = &plane,
+		['t'] = &triangle,
 	};
 
 	return (hit_o[(int)o.type](rd, data, o));

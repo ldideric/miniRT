@@ -6,7 +6,7 @@
 #    By: ldideric <ldideric@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/06 14:04:07 by ldideric       #+#    #+#                 #
-#    Updated: 2020/03/13 10:22:58 by ldideric      ########   odam.nl          #
+#    Updated: 2020/03/25 19:04:35 by ldideric      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ PARS_SRC		=	reader.c \
 
 RAY_SRC			=	raytracer.c \
 					ndc.c \
-					math1.c
+					math1.c \
+					sphere.c \
+					triangle.c
 
 EXTRA_SRC		=	error.c \
 					hooks.c \
@@ -113,7 +115,7 @@ ifdef FSAN
 FLAGS	+= -fsanitize=address
 endif
 ifdef MLX
-MMLX	= @echo "$(PL)Skipping re-compiling the MLX Library.$(RES)"
+MMLX	= @echo "$(R)Skipping re-compiling the MLX Library.$(RES)"
 CMLX	= $(NAME)
 endif
 
@@ -143,7 +145,7 @@ X		= 1
 all: $(NAME)
 
 $(NAME):
-	@echo "$(P)Compiling MiniLibX Library$(PI)"
+	@echo "$(P)Compiling MiniLibX Library$(O)"
 	$(MMLX)
 	@echo "$(P)Compiling miniRT$(PI)"
 	gcc $(C_FILES) $(FLAGS) libmlx.dylib -o $(NAME)

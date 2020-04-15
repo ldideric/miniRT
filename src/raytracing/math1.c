@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:21:58 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/12 12:53:24 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/03/25 17:24:20 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ t_vect		vect_plus(t_vect a, t_vect b)
 	a.y += b.y;
 	a.z += b.z;
 	return (a);
+}
+
+t_vect		cross_pr(t_vect a, t_vect b)
+{
+	t_vect new;
+
+	new.x = (a.y * b.z) - (a.z * b.y);
+	new.y = (a.z * b.x) - (a.x * b.z);
+	new.z = (a.x * b.y) - (a.y * b.x);
+	return (new);
 }
 
 double		dot(t_vect a, t_vect b)

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/25 19:01:55 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/08 13:39:08 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,17 +194,18 @@ double				get_ndcx_pos(t_base *b, int x);
 t_vect				vect_min(t_vect a, t_vect b);
 t_vect				vect_plus(t_vect a, t_vect b);
 
+t_vect				cross_pr(t_vect a, t_vect b);
 double				dot(t_vect v, t_vect u);
 double				length(t_vect v);
 double				length_betw(t_vect a, t_vect b);
-t_vect				cross_pr(t_vect a, t_vect b);
 t_vect				vec3(double x, double y, double z);
 
 /*
 ** Reader functions
 */
 
-t_objs				*reader(t_base *t, int i, int c_objs);
+t_objs				*read_starter(t_base *b);
+t_objs				*read_loop(t_base *b, t_objs *o, char *s);
 int					obj_cntr(char *s);
 int					cam_light_cntr(char *s, char c);
 void				*reader_free(void *a, void *b, void *c, void *d);

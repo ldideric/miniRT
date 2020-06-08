@@ -5,13 +5,12 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/11 06:03:54 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 17:03:04 by ldideric      ########   odam.nl         */
+/*   Created: 2020/06/08 13:42:55 by ldideric       #+#    #+#                */
+/*   Updated: 2020/06/08 13:42:57 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra.h>
-#include <sys/types.h>
 
 static void		o_specifier(char *s, t_objs *o)
 {
@@ -78,14 +77,13 @@ static t_objs	*reader_ext(char **s, t_base *b)
 	return (o);
 }
 
-t_objs			*reader(t_base *b, int i, int c_objs)
+t_objs			*read_loop(t_base *b, t_objs *o, char *s)
 {
-	t_objs		*o;
-	char		*s;
+	int			i;
+	int			c_objs;
 
-	o = reader_ext(&s, b);
-	if (o == NULL)
-		return (NULL);
+	i = 0;
+	c_objs = 0;
 	b->i_l = -1;
 	while (s[i] != '\0')
 	{
@@ -106,4 +104,15 @@ t_objs			*reader(t_base *b, int i, int c_objs)
 	b->i_c = 0;
 	free(s);
 	return (o);
+}
+
+t_objs			*read_starter(t_base *b)
+{
+	t_objs		*o;
+	char		*s;
+
+	o = reader_ext(&s, b);
+	if (o == NULL)
+		return (NULL);
+	return (read_loop(b, o, s));
 }

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/25 19:02:31 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/28 17:36:05 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/08 12:53:48 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		tr_right_side(t_vect v0, t_vect v1, t_vect P, t_vect N)
 	t_vect vp;
 	t_vect C;
 
-	edge = vect_min(v1, v0); 
-	vp = vect_min(P, v0); 
-	C = cross_pr(edge, vp); 
+	edge = vect_min(v1, v0);
+	vp = vect_min(P, v0);
+	C = cross_pr(edge, vp);
 	if (dot(N, C) < 0)
 		return (0);
 	return (1);

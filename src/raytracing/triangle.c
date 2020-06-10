@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/25 19:02:31 by ldideric       #+#    #+#                */
-/*   Updated: 2020/06/08 12:53:48 by ldideric      ########   odam.nl         */
+/*   Created: 2020/03/25 19:02:31 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/10 19:37:06 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ t_vect			triangle(t_vect rd, t_data *data, t_objs o)
 	double t;
 	double d;
 
+	// plane's normal N
 	N = cross_pr(vect_min(o.pos2, o.pos1), vect_min(o.pos3, o.pos1));
+	
+	// check if plane's normal is same as camera ray (parallel)
 	if (fabs(dot(N, rd)) < 0.00001)
 		return ((t_vect){0, 0, 0, 0});
+	
 	d = dot(N, o.pos1);
+	
 	t = (dot(N, data->b.cam.c[data->b.i_c].pos) + d) / dot(N, rd);
+	printf("%f|%f\n", dot(N, rd), t);
+	
 	if (t < 0)
 		return ((t_vect){0, 0, 0, 0});
 	P = vec3(rd.x * t, rd.y * t, rd.z * t);
@@ -49,6 +56,6 @@ t_vect			triangle(t_vect rd, t_data *data, t_objs o)
 	if (tr_right_side(o.pos3, o.pos1, P, N) == 0)
 		return ((t_vect){0, 0, 0, 0});
 	P.hit = 1;
-	printf("[HIT]%f,%f,%f,%d", P.x, P.y, P.z, P.hit);
+	printf("[HIT]%f,%f,%f,%d\n", P.x, P.y, P.z, P.hit);
 	return (P);
 }

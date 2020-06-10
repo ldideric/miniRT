@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: ldideric <ldideric@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/01/06 14:04:07 by ldideric       #+#    #+#                 #
-#    Updated: 2020/03/25 19:04:35 by ldideric      ########   odam.nl          #
+#    Created: 2020/01/06 14:04:07 by ldideric      #+#    #+#                  #
+#    Updated: 2020/06/10 19:42:56 by ldideric      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ RAY_SRC			=	raytracer.c \
 					ndc.c \
 					math1.c \
 					sphere.c \
+					plane.c \
 					triangle.c
 
 EXTRA_SRC		=	error.c \

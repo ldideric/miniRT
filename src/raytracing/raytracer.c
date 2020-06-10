@@ -5,20 +5,12 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/14 12:05:13 by ldideric       #+#    #+#                */
-/*   Updated: 2020/06/08 13:36:26 by ldideric      ########   odam.nl         */
+/*   Created: 2020/02/14 12:05:13 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/10 20:00:52 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra.h>
-
-t_vect			plane(t_vect rd, t_data *data, t_objs o)
-{
-	(void)rd;
-	(void)data;
-	(void)o;
-	return ((t_vect){0, 0, 0, 0});
-}
 
 t_vect			hit_checker(t_vect rd, t_objs o, t_data *data)
 {

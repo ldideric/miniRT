@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/30 10:28:36 by ldideric       #+#    #+#                */
-/*   Updated: 2020/06/08 13:39:08 by ldideric      ########   odam.nl         */
+/*   Created: 2020/01/30 10:28:36 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/11 16:21:43 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct		s_objs
 	t_vect			pos2;
 	t_vect			pos3;
 	t_vect			vec;
+	int				normal;
 	double			dia;
 	double			height;
 	double			size;
@@ -162,7 +163,7 @@ typedef struct		s_vars
 
 typedef void		(*t_read_b)(char *s, t_base *b);
 typedef void		(*t_read_o)(char *s, t_objs *o);
-typedef t_vect		(*t_hit_o)(t_vect rd, t_data *data, t_objs o);
+typedef t_vect		(*t_hit_o)(t_vect *rd, t_data *data, t_objs *o);
 
 void				printer(t_objs *o);
 void				graphing(t_data *img, int x_max, int y_max);
@@ -170,6 +171,9 @@ void				graphing(t_data *img, int x_max, int y_max);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 void				*px_loop(t_data *data);
+unsigned int		each_px(t_vect *rd, t_data *data);
+unsigned int		first_hit(t_data *data);
+t_vect				hit_checker(t_vect *rd, t_objs *o, t_data *data);
 
 void				*errors(int error);
 void				hooks(t_vars *vars);
@@ -178,9 +182,9 @@ void				hooks(t_vars *vars);
 ** Object functions
 */
 
-t_vect				sphere(t_vect rd, t_data *data, t_objs o);
-t_vect				plane(t_vect rd, t_data *data, t_objs o);
-t_vect				triangle(t_vect rd, t_data *data, t_objs o);
+t_vect				sphere(t_vect *rd, t_data *data, t_objs *o);
+t_vect				plane(t_vect *rd, t_data *data, t_objs *o);
+t_vect				triangle(t_vect *rd, t_data *data, t_objs *o);
 
 /*
 ** Math functions

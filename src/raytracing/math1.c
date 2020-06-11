@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:21:58 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/10 19:44:09 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/11 15:27:17 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_vect		vec3(double x, double y, double z)
 	new.x = x;
 	new.y = y;
 	new.z = z;
+	new.hit = 0;
 	return (new);
 }
 

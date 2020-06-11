@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 15:23:37 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 15:53:23 by ldideric      ########   odam.nl         */
+/*   Created: 2020/02/05 15:23:37 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/11 19:18:05 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int			obj_cntr(char *s)
 	count = 0;
 	while (s[i] != '\0' && s[i + 1] != '\0')
 	{
+		if (s[i] == '#')
+			while ((s[i] != '\n' && s[i + 1] != '\n') ||
+					(s[i] != '\0' && s[i + 1] != '\0'))
+				i++;
 		if (ft_isalpha(s[i]) && ft_isalpha(s[i + 1]))
 			count++;
 		i++;

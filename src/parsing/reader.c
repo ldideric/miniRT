@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/06/08 13:42:55 by ldideric       #+#    #+#                */
-/*   Updated: 2020/06/08 13:42:57 by ldideric      ########   odam.nl         */
+/*   Created: 2020/06/08 13:42:55 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/11 16:27:04 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		o_specifier(char *s, t_objs *o)
 	(*(u_int16_t *)s == *(u_int16_t *)"sq") ? spec['3'](s, o) : NULL;
 	(*(u_int16_t *)s == *(u_int16_t *)"cy") ? spec['4'](s, o) : NULL;
 	(*(u_int16_t *)s == *(u_int16_t *)"tr") ? spec['5'](s, o) : NULL;
+	o->normal = -1;
 }
 
 static void		b_specifier(char *s, t_base *b)

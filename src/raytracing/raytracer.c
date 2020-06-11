@@ -6,13 +6,13 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/10 20:00:52 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/11 16:23:31 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra.h>
 
-t_vect			hit_checker(t_vect rd, t_objs o, t_data *data)
+t_vect			hit_checker(t_vect *rd, t_objs *o, t_data *data)
 {
 	static const t_hit_o hit_o[128] = {
 		['s'] = &sphere,
@@ -20,7 +20,7 @@ t_vect			hit_checker(t_vect rd, t_objs o, t_data *data)
 		['t'] = &triangle,
 	};
 
-	return (hit_o[(int)o.type](rd, data, o));
+	return (hit_o[(int)o->type](rd, data, o));
 }
 
 unsigned int	first_hit(t_data *data)
@@ -56,14 +56,14 @@ unsigned int	first_hit(t_data *data)
 	return (rgb.color);
 }
 
-unsigned int	each_px(t_vect rd, t_data *data)
+unsigned int	each_px(t_vect *rd, t_data *data)
 {
 	int i;
 
 	i = 0;
 	while (data->o[i].type)
 	{
-		data->o[i].hit = hit_checker(rd, data->o[i], data);
+		data->o[i].hit = hit_checker(rd, &data->o[i], data);
 		i++;
 	}
 	return (first_hit(data));
@@ -90,7 +90,7 @@ void			*px_loop(t_data *data)
 		{
 			px_pos.x = get_ndcx_pos(&data->b, x);
 			ray = ft_normalize(vect_min(px_pos, data->b.cam.c[i].pos));
-			my_mlx_pixel_put(data, x, y, each_px(ray, data));
+			my_mlx_pixel_put(data, x, y, each_px(&ray, data));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/08 13:42:55 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/11 16:27:04 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/25 16:12:07 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,24 @@ t_objs			*read_loop(t_base *b, t_objs *o, char *s)
 	return (o);
 }
 
-t_objs			*read_starter(t_base *b)
+void			*read_starter(t_data *d)
 {
-	t_objs		*o;
 	char		*s;
+	int			i;
 
-	o = reader_ext(&s, b);
-	if (o == NULL)
+	d->o = reader_ext(&s, &d->b);
+	if (d->o == NULL)
 		return (NULL);
-	return (read_loop(b, o, s));
+	d->o = read_loop(&d->b, d->o, s);
+	if (d->b.cam.max > 1)
+	{
+		i = 0;
+		d->sav = malloc(sizeof(void *) * d->b.cam.max);
+		while (i < d->b.cam.max)
+		{
+			d->sav[i] = NULL;
+			i++;
+		}
+	}
+	return ((void *)1);
 }

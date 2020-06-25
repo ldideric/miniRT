@@ -5,36 +5,60 @@
 /*                                                     +:+                    */
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 15:21:31 by ldideric       #+#    #+#                */
-/*   Updated: 2020/03/13 17:34:26 by ldideric      ########   odam.nl         */
+/*   Created: 2020/02/05 15:21:31 by ldideric      #+#    #+#                 */
+/*   Updated: 2020/06/25 16:22:48 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra.h>
 
+static void			saved_images_hooks(t_vars *vars)
+{
+	if (vars->data.sav[vars->data.b.i_c] == NULL)
+	{
+		ft_printf("Rendering...\n");
+		px_loop(&vars->data);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
+	}
+	else
+	{
+		ft_printf("Loading from cache...\n");
+		ft_printf("\x1b[38;5;83m[+]\x1b[0mCam: %02d/%02d\n", vars->data.b.i_c + 1,	vars->data.b.cam.max);
+		ft_printf("\x1b[38;5;83m[+]\x1b[0mpos:%d,%d,%d - vec:%d,%d,%d - fov:%d\n---\n", (int)vars->data.b.cam.c[vars->data.b.i_c].pos.x, (int)vars->data.b.cam.c[vars->data.b.i_c].pos.y, (int)vars->data.b.cam.c[vars->data.b.i_c].pos.z, (int)vars->data.b.cam.c[vars->data.b.i_c].vec.x, (int)vars->data.b.cam.c[vars->data.b.i_c].vec.y, (int)vars->data.b.cam.c[vars->data.b.i_c].vec.z, (int)vars->data.b.cam.c[vars->data.b.i_c].fov);
+		mlx_put_image_to_window(vars->mlx, vars->win,
+		vars->data.sav[vars->data.b.i_c], 0, 0);
+	}
+}
+
 static int			cam_change_hooks(int keycode, t_vars *vars)
 {
 	if (keycode == 124 && vars->data.b.cam.max > 1)
 	{
+		if (vars->data.sav[vars->data.b.i_c] == NULL)
+			vars->data.sav[vars->data.b.i_c] = vars->data.img;
 		if (vars->data.b.i_c == vars->data.b.cam.max - 1)
 			vars->data.b.i_c = 0;
 		else
 			vars->data.b.i_c++;
-		ft_printf("Rendering...\n");
-		px_loop(&vars->data);
-		ft_printf("Done!\n");
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
+		saved_images_hooks(vars);
+		// ft_printf("Rendering...\n");
+		// px_loop(&vars->data);
+		// ft_printf("Done!\n");
+		// mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	}
 	else if (keycode == 123 && vars->data.b.cam.max > 1)
 	{
+		if (vars->data.sav[vars->data.b.i_c] == NULL)
+			vars->data.sav[vars->data.b.i_c] = vars->data.img;
 		if (vars->data.b.i_c == 0)
 			vars->data.b.i_c = vars->data.b.cam.max - 1;
 		else
 			vars->data.b.i_c--;
-		ft_printf("Rendering...\n");
-		px_loop(&vars->data);
-		ft_printf("Done!\n");
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
+		saved_images_hooks(vars);
+		// ft_printf("Rendering...\n");
+		// px_loop(&vars->data);
+		// ft_printf("Done!\n");
+		// mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	}
 	return (0);
 }

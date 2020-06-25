@@ -6,8 +6,10 @@
 - [ ] fix parsing fully
 - [x] raytracer with minus camera
 - [x] moving camera with hooks
+- [ ] saving image when switching cameras for optimalization
 
 ### Objects
+- [x] spheres
 - [ ] planes
 - [ ] squares
 - [ ] triangles

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/25 19:02:31 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/11 16:17:28 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/25 16:27:12 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_vect			triangle(t_vect *rd, t_data *data, t_objs *o)
 		return ((t_vect){0, 0, 0, 0});
 	d = dot(n, o->pos1);
 	t = (dot(n, data->b.cam.c[data->b.i_c].pos) + d) / dot(n, *rd);
-	printf("%f|%f\n", dot(n, *rd), t);
+	// printf("%f|%f\n", dot(n, *rd), t);
 	if (t < 0)
 		return ((t_vect){0, 0, 0, 0});
 	p = vec3(rd->x * t, rd->y * t, rd->z * t);
@@ -65,6 +65,6 @@ t_vect			triangle(t_vect *rd, t_data *data, t_objs *o)
 		tr_right_side(o->pos3, o->pos1, p, n) == 0)
 		return ((t_vect){0, 0, 0, 0});
 	p.hit = 1;
-	printf("[HIT]%f,%f,%f,%d\n", p.x, p.y, p.z, p.hit);
+	// printf("[HIT]%f,%f,%f,%d\n", p.x, p.y, p.z, p.hit);
 	return (p);
 }

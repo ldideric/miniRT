@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/11 16:21:43 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/25 15:17:12 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct		s_data
 	int				endian;
 	t_base			b;
 	t_objs			*o;
+	void			**sav;
 }					t_data;
 
 typedef struct		s_vars
@@ -208,7 +209,7 @@ t_vect				vec3(double x, double y, double z);
 ** Reader functions
 */
 
-t_objs				*read_starter(t_base *b);
+void				*read_starter(t_data *d);
 t_objs				*read_loop(t_base *b, t_objs *o, char *s);
 int					obj_cntr(char *s);
 int					cam_light_cntr(char *s, char c);

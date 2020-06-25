@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:10 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/10 19:44:03 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/25 15:13:31 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int				main(int argc, char **argv)
 		vars.data.b.file = argv[1];
 	else
 		return ((int)errors(ERR_NO_RT));
-	vars.data.o = read_starter(&vars.data.b);
-	if (vars.data.o == NULL)
+	if (read_starter(&vars.data) == NULL)
 		return (0);
 	if (mlx_start(&vars.data, &vars) == NULL)
 		return ((int)errors(ERR_MLX));

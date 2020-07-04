@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/25 15:17:12 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/29 15:03:05 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef void		(*t_read_o)(char *s, t_objs *o);
 typedef t_vect		(*t_hit_o)(t_vect *rd, t_data *data, t_objs *o);
 
 void				printer(t_objs *o);
+void				norm_cam_printer(t_data *data);
 void				graphing(t_data *img, int x_max, int y_max);
 
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);

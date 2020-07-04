@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:23:37 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/11 19:18:05 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/29 15:08:32 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,28 @@ int			obj_cntr(char *s)
 	while (s[i] != '\0' && s[i + 1] != '\0')
 	{
 		if (s[i] == '#')
-			while ((s[i] != '\n' && s[i + 1] != '\n') ||
-					(s[i] != '\0' && s[i + 1] != '\0'))
+			while ((s[i] != '\n' && s[i + 1] != '\n')
+				|| (s[i] != '\0' && s[i + 1] != '\0'))
 				i++;
 		if (ft_isalpha(s[i]) && ft_isalpha(s[i + 1]))
 			count++;
 		i++;
 	}
 	return (count);
+}
+
+void		norm_cam_printer(t_data *data)
+{
+	int		i;
+
+	i = data->b.i_c;
+	ft_printf("\x1b[38;5;83m[+]\x1b[0mCam: %02d/%02d\n", i + 1,
+	data->b.cam.max);
+	ft_printf("\x1b[38;5;83m[+]\x1b[0mpos:%d,%d,%d - vec:%d,%d,%d - \
+	fov:%d\n---\n", (int)data->b.cam.c[i].pos.x, (int)data->b.cam.c[i].pos.y,
+	(int)data->b.cam.c[i].pos.z, (int)data->b.cam.c[i].vec.x,
+	(int)data->b.cam.c[i].vec.y, (int)data->b.cam.c[i].vec.z,
+	(int)data->b.cam.c[i].fov);
 }
 
 void		printer(t_objs *o)

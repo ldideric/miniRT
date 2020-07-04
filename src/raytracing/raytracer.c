@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/11 16:23:31 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/06/29 15:07:01 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ void			*px_loop(t_data *data)
 	y = 0;
 	i = data->b.i_c;
 	px_pos.z = -1;
-	ft_printf("\x1b[38;5;83m[+]\x1b[0mCam: %02d/%02d\n", i + 1,	data->b.cam.max);
-	ft_printf("\x1b[38;5;83m[+]\x1b[0mpos:%d,%d,%d - vec:%d,%d,%d - fov:%d\n---\n", (int)data->b.cam.c[i].pos.x, (int)data->b.cam.c[i].pos.y, (int)data->b.cam.c[i].pos.z, (int)data->b.cam.c[i].vec.x, (int)data->b.cam.c[i].vec.y, (int)data->b.cam.c[i].vec.z, (int)data->b.cam.c[i].fov);
+	norm_cam_printer(data);
 	while (y < data->b.res.y_max)
 	{
 		x = 0;

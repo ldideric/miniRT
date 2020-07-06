@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:36 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/29 15:03:05 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/07/04 18:08:02 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@
 ** DEFINES ---------------------------------------------------- |
 */
 
-# define WIN_NAME "bepis is better than pepsi"
-# define TRUE	1
-# define FALSE	0
+# define WIN_NAME	"bepis is better than pepsi"
+# define TRUE		1
+# define FALSE		0
+
+# define B_ESC		53
+# define B_RIGHT	124
+# define B_LEFT		123
+# define B_Q		12
 
 /*
 ** ERROR MESSAGES

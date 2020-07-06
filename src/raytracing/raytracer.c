@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/29 15:07:01 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/07/04 17:31:46 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void			*px_loop(t_data *data)
 		{
 			px_pos.x = get_ndcx_pos(&data->b, x);
 			ray = ft_normalize(vect_min(px_pos, data->b.cam.c[i].pos));
+			// ray = ft_normalize(vect_min(ray, data->b.cam.c[i].vec));
+			// ray = ft_normalize(vect_min(ray, data->b.cam.c[i].vec));
 			my_mlx_pixel_put(data, x, y, each_px(&ray, data));
 			x++;
 		}

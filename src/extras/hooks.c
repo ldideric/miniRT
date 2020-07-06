@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:21:31 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/07/01 13:43:58 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/07/04 18:06:39 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static int			cam_change_hooks(int keycode, t_vars *vars)
 	else
 		vars->data.addr = mlx_get_data_addr(vars->data.sav[vars->data.b.i_c],
 		&(vars->data.bpp), &(vars->data.len), &(vars->data.endian));
-	if (keycode == 124)
+	if (keycode == B_RIGHT)
 	{
 		if (vars->data.b.i_c == vars->data.b.cam.max - 1)
 			vars->data.b.i_c = 0;
 		else
 			vars->data.b.i_c++;
 	}
-	else
+	else if (keycode == B_LEFT)
 	{
 		if (vars->data.b.i_c == 0)
 			vars->data.b.i_c = vars->data.b.cam.max - 1;
@@ -62,12 +62,12 @@ static int			cam_change_hooks(int keycode, t_vars *vars)
 
 static int			button_press_hooks(int keycode, t_vars *vars)
 {
-	if (keycode == 53 || keycode == 12)
+	if (keycode == B_ESC || keycode == B_Q)
 	{
 		// reader_free(vars->data.o, vars->data.b.light, vars->data.b.cam.c, NULL);
 		exit(mlx_destroy_window(vars->mlx, vars->win) * 0);
 	}
-	if ((keycode == 123 || keycode == 124) && vars->data.b.cam.max > 1)
+	if ((keycode == B_RIGHT || keycode == B_LEFT) && vars->data.b.cam.max > 1)
 		cam_change_hooks(keycode, vars);
 	return (0);
 }

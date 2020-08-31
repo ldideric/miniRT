@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/25 19:02:31 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/07/04 17:52:20 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/08/15 15:50:32 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_vect			triangle(t_vect *rd, t_data *data, t_objs *o)
 	if (fabs(dot(n, *rd)) < 0.00001)
 		return ((t_vect){0, 0, 0, 0});
 	d = dot(n, o->pos1);
-	t = (dot(n, data->b.cam.c[data->b.i_c].pos) + d) / dot(n, *rd);
+	t = -(dot(n, data->b.cam.c[data->b.i_c].pos) - d) / dot(n, *rd);
 	// printf("%f|%f\n", dot(n, *rd), t);
 	if (t < 0)
 		return ((t_vect){0, 0, 0, 0});

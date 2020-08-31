@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 10:28:10 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/25 15:13:31 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/08/20 18:17:54 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,4 @@ int				main(int argc, char **argv)
 	mlx_loop(vars.mlx);
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/08 13:42:55 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/06/25 16:12:07 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/08/31 19:19:47 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_objs	*reader_ext(char **s, t_base *b)
 	t_objs		*o;
 	int			ret;
 	int			fd;
-
+	
 	s[0] = malloc(sizeof(char) * (4096 + 1));
 	if (s[0] == NULL)
 		return (errors(ERR_MALLOC));

@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:21:31 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/08/20 17:56:42 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/09/15 10:28:13 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int			button_press_hooks(int keycode, t_vars *vars)
 	if (keycode == B_ESC || keycode == B_Q)
 	{
 		// reader_free(vars->data.o, vars->data.b.light, vars->data.b.cam.c, NULL);
+		//system("leaks miniRT"); // dis aint allowed buddyo
 		exit(mlx_destroy_window(vars->mlx, vars->win) * 0);
 	}
 	if ((keycode == B_RIGHT || keycode == B_LEFT) && vars->data.b.cam.max > 1)

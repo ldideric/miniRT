@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "minirt.h": "c"
+    },
+    "files.autoSave": "afterDelay",
+    "editor.insertSpaces": false,
+    "editor.rulers": [80],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#53afe0"
+    }
+}

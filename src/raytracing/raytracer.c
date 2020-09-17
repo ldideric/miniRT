@@ -6,7 +6,7 @@
 /*   By: ldideric <ldideric@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 12:05:13 by ldideric      #+#    #+#                 */
-/*   Updated: 2020/08/20 16:18:04 by ldideric      ########   odam.nl         */
+/*   Updated: 2020/09/15 13:17:14 by ldideric      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,14 @@ unsigned int	first_hit(t_data *data)
 	hit = (t_vect){0, 0, 0, 0};
 	while (data->o[i].type)
 	{
-		if (data->o[i].hit.hit == 1)
+		if (hit.hit == 0 && data->o[i].hit.hit == 1)
 		{
 			rgb = data->o[i].rgb;
 			hit = data->o[i].hit;
-			break ;
 		}
-		i++;
-	}
-	while (data->o[i].type)
-	{
-		if (length_betw(hit, data->b.cam.c[data->b.i_c].pos) >
-			length_betw(data->o[i].hit, data->b.cam.c[data->b.i_c].pos)
-			&& data->o[i].hit.hit == 1)
+		else if (length_betw(hit, data->b.cam.c[data->b.i_c].pos) >
+				length_betw(data->o[i].hit, data->b.cam.c[data->b.i_c].pos)
+				&& data->o[i].hit.hit == 1)
 		{
 			rgb = data->o[i].rgb;
 			hit = data->o[i].hit;
@@ -89,8 +84,6 @@ void			*px_loop(t_data *data)
 		{
 			px_pos.x = get_ndcx_pos(&data->b, x);
 			ray = ft_normalize(vect_min(px_pos, data->b.cam.c[i].pos));
-			// ray = ft_normalize(vect_min(ray, data->b.cam.c[i].vec));
-			// ray = ft_normalize(vect_min(ray, data->b.cam.c[i].vec));
 			my_mlx_pixel_put(data, x, y, each_px(&ray, data));
 			x++;
 		}
